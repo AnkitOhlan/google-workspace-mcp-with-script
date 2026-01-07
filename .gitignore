@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Sensitive credentials - NEVER commit these
+credentials.json
+token.json
+*.pem
+*.key
+
+# Service account keys
+service-account*.json
+*-service-account.json
+
+# Environment variables
+.env
+.env.*
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Backup files
+*.bak
+*.backup
+src/backup/
+
+# Test coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

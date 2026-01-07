@@ -1,0 +1,25 @@
+{
+  "name": "mcp-googledocs-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test tests/",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "fastmcp": "^3.24.0",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^148.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
