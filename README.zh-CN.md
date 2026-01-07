@@ -58,7 +58,25 @@
 
 ## 快速开始
 
-### 1. 克隆并安装
+### 方式 A: 交互式安装向导 (推荐)
+
+```bash
+git clone https://github.com/sputnicyoji/google-docs-mcp-for-claudecode.git
+cd google-docs-mcp-for-claudecode
+npm install
+npm run setup
+```
+
+安装向导将自动:
+- 检查环境 (Node.js、npm、构建状态)
+- 如需要则自动编译 TypeScript
+- 引导您完成凭据设置
+- 执行 OAuth 授权流程
+- 生成并可选择自动更新 Claude Code CLI 配置
+
+### 方式 B: 手动设置
+
+#### 1. 克隆并安装
 
 ```bash
 git clone https://github.com/sputnicyoji/google-docs-mcp-for-claudecode.git
@@ -67,7 +85,7 @@ npm install
 npm run build
 ```
 
-### 2. Google Cloud 设置
+#### 2. Google Cloud 设置
 
 1. 访问 [Google Cloud Console](https://console.cloud.google.com/)
 2. 创建新项目或选择现有项目
@@ -85,7 +103,7 @@ npm run build
    - 选择"桌面应用"
    - 下载 JSON 文件并另存为项目根目录的 `credentials.json`
 
-### 3. 认证
+#### 3. 认证
 
 ```bash
 node ./dist/server.js
@@ -93,7 +111,7 @@ node ./dist/server.js
 
 按照终端中的 URL 授权访问。授权后将创建 `token.json`。
 
-### 4. 配置 Claude Code CLI
+#### 4. 配置 Claude Code CLI
 
 添加到您的 Claude Code MCP 配置:
 

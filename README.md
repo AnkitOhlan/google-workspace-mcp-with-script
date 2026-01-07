@@ -58,7 +58,25 @@ This server provides **49 tools** across 4 Google Workspace services:
 
 ## Quick Start
 
-### 1. Clone and Install
+### Option A: Interactive Setup Wizard (Recommended)
+
+```bash
+git clone https://github.com/sputnicyoji/google-docs-mcp-for-claudecode.git
+cd google-docs-mcp-for-claudecode
+npm install
+npm run setup
+```
+
+The setup wizard will:
+- Check your environment (Node.js, npm, build)
+- Auto-build TypeScript if needed
+- Guide you through credential setup
+- Run OAuth authorization
+- Generate and optionally auto-update Claude Code CLI config
+
+### Option B: Manual Setup
+
+#### 1. Clone and Install
 
 ```bash
 git clone https://github.com/sputnicyoji/google-docs-mcp-for-claudecode.git
@@ -67,7 +85,7 @@ npm install
 npm run build
 ```
 
-### 2. Google Cloud Setup
+#### 2. Google Cloud Setup
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select an existing one
@@ -85,7 +103,7 @@ npm run build
    - Select "Desktop app"
    - Download the JSON file and save as `credentials.json` in the project root
 
-### 3. Authenticate
+#### 3. Authenticate
 
 ```bash
 node ./dist/server.js
@@ -93,7 +111,7 @@ node ./dist/server.js
 
 Follow the URL in the terminal to authorize access. After authorization, a `token.json` will be created.
 
-### 4. Configure Claude Code CLI
+#### 4. Configure Claude Code CLI
 
 Add to your Claude Code MCP configuration:
 
