@@ -2,6 +2,8 @@
 // Tool registry - exports all tool registration functions
 
 export { registerScriptTools, SCRIPT_TOOLS_COUNT } from './scriptTools.js';
+export { registerGmailTools, GMAIL_TOOLS_COUNT } from './gmailTools.js';
+export { registerCalendarTools, CALENDAR_TOOLS_COUNT } from './calendarTools.js';
 
 // Tool counts for documentation
 export const TOOL_COUNTS = {
@@ -9,7 +11,9 @@ export const TOOL_COUNTS = {
   sheets: 14,    // Google Sheets tools
   drive: 16,     // Google Drive tools
   script: 4,     // Apps Script tools
-  total: 49
+  gmail: 15,     // Gmail tools
+  calendar: 8,   // Calendar tools
+  total: 72      // Updated total (15+14+16+4+15+8)
 };
 
 // Tool categories for documentation
@@ -72,5 +76,32 @@ export const TOOL_CATEGORIES = {
     'updateScriptContent',
     'getScriptContent',
     'getScriptProjects',
+  ],
+  'Gmail': [
+    'searchGmailMessages',
+    'getGmailMessage',
+    'getGmailMessagesBatch',
+    'getGmailAttachment',
+    'sendGmailMessage',
+    'createGmailDraft',
+    'getGmailThread',
+    'listGmailLabels',
+    'createGmailLabel',
+    'deleteGmailLabel',
+    'listGmailFilters',
+    'createGmailFilter',
+    'deleteGmailFilter',
+    'modifyGmailMessageLabels',
+    'trashGmailMessage',
+  ],
+  'Google Calendar': [
+    'listCalendars',
+    'getCalendarEvents',
+    'getCalendarEvent',
+    'createCalendarEvent',
+    'updateCalendarEvent',
+    'deleteCalendarEvent',
+    'quickAddCalendarEvent',
+    'getCalendarFreeBusy',
   ],
 };

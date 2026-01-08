@@ -13,6 +13,8 @@ import {
   getDriveClient,
   getSheetsClient,
   getScriptClient,
+  getGmailClient,
+  getCalendarClient,
   getAuthClient,
   setupProcessErrorHandlers
 } from './clients.js';
@@ -35,6 +37,8 @@ import * as GDocsHelpers from './googleDocsApiHelpers.js';
 import * as SheetsHelpers from './googleSheetsApiHelpers.js';
 import { convertDocsJsonToMarkdown } from './helpers/markdown.js';
 import { registerScriptTools } from './tools/scriptTools.js';
+import { registerGmailTools } from './tools/gmailTools.js';
+import { registerCalendarTools } from './tools/calendarTools.js';
 
 // Setup process error handlers
 setupProcessErrorHandlers();
@@ -2396,6 +2400,12 @@ server.addTool({
 
 // Register Apps Script tools from module
 registerScriptTools(server);
+
+// Register Gmail tools from module
+registerGmailTools(server);
+
+// Register Calendar tools from module
+registerCalendarTools(server);
 
 // --- Server Startup ---
 async function startServer() {

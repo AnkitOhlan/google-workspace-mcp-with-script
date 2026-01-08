@@ -7,7 +7,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)
 
-一個全面的 MCP (Model Context Protocol) 伺服器,提供完整的 Google Workspace 整合 - 包括 Google Docs、Sheets、Drive 和 **Apps Script API**。相容 **Claude Code CLI**、**Cursor IDE** 及其他 MCP 用戶端。
+一個全面的 MCP (Model Context Protocol) 伺服器,提供完整的 Google Workspace 整合 - 包括 Google Docs、Sheets、Drive、**Gmail**、**Calendar** 和 **Apps Script API**。相容 **Claude Code CLI**、**Cursor IDE** 及其他 MCP 用戶端。
 
 > **獨特功能**: 這是**唯一**支援 **Apps Script API** 的 Google Workspace MCP 伺服器 - 實現 AI 驅動的 Google Sheets、Docs 及其他 Workspace 產品自動化。
 
@@ -15,13 +15,15 @@
 
 ## 功能特性
 
-本伺服器提供 **49 個工具**,涵蓋 4 個 Google Workspace 服務:
+本伺服器提供 **72 個工具**,涵蓋 6 個 Google Workspace 服務:
 
 | 服務 | 工具數 | 描述 |
 |------|--------|------|
 | Google Docs | 15 | 讀取、寫入、格式化、樣式、圖片、表格、評論 |
 | Google Sheets | 14 | 讀取、寫入、格式化、建立試算表、管理工作表 |
 | Google Drive | 16 | 列出、搜尋、建立、移動、複製、刪除檔案和資料夾 |
+| Gmail | 15 | 搜尋、閱讀、傳送、草稿、標籤、篩選器、對話 |
+| Google Calendar | 8 | 日曆清單、活動、建立、更新、刪除、空閒/忙碌 |
 | Apps Script | 4 | 建立和管理繫結指令碼以實現自動化 |
 
 ### Google Docs (15 個工具)
@@ -51,6 +53,22 @@
 ### Apps Script (4 個工具)
 
 - **指令碼管理**: `createBoundScript`、`updateScriptContent`、`getScriptContent`、`getScriptProjects`
+
+### Gmail (15 個工具)
+
+- **訊息**: `searchGmailMessages`、`getGmailMessage`、`getGmailMessagesBatch`、`getGmailAttachment`
+- **傳送與草稿**: `sendGmailMessage`、`createGmailDraft`
+- **對話**: `getGmailThread`
+- **標籤**: `listGmailLabels`、`createGmailLabel`、`deleteGmailLabel`、`modifyGmailMessageLabels`
+- **篩選器**: `listGmailFilters`、`createGmailFilter`、`deleteGmailFilter`
+- **管理**: `trashGmailMessage`
+
+### Google Calendar (8 個工具)
+
+- **日曆**: `listCalendars`
+- **活動**: `getCalendarEvents`、`getCalendarEvent`、`createCalendarEvent`、`updateCalendarEvent`、`deleteCalendarEvent`
+- **快捷操作**: `quickAddCalendarEvent`
+- **可用性**: `getCalendarFreeBusy`
 
 ## 前置需求
 
@@ -97,9 +115,11 @@ npm run build
    - Google Sheets API
    - Google Drive API
    - Apps Script API
+   - Gmail API
+   - Google Calendar API
 4. 設定 OAuth 同意畫面:
    - 選擇「外部」使用者類型
-   - 新增所需範圍: `documents`、`spreadsheets`、`drive.file`、`script.projects`
+   - 新增所需範圍: `documents`、`spreadsheets`、`drive.file`、`script.projects`、`gmail`、`calendar`
    - 將您的電子郵件新增為測試使用者
 5. 建立 OAuth 憑證:
    - 前往 憑證 > 建立憑證 > OAuth 用戶端 ID
@@ -211,26 +231,52 @@ node ./dist/server.js
 取得指令碼專案 1abc...xyz 的內容
 ```
 
+### Gmail
+
+```
+搜尋來自 john@example.com 的未讀郵件
+閱讀 ID 為 abc123 的郵件訊息
+傳送郵件給 jane@example.com,主旨為「會議」
+為對話 xyz789 建立草稿回覆
+列出所有 Gmail 標籤
+建立篩選器,為來自 support@example.com 的郵件新增標籤
+```
+
+### Google Calendar
+
+```
+列出我的所有日曆
+取得本週主日曆的活動
+建立明天上午10點的「團隊站會」會議
+快速新增活動「週五中午和 Sarah 吃午餐」
+查看下週一的空閒/忙碌時間
+從我的日曆中刪除活動 abc123
+```
+
 ## 專案結構
 
 ```
 google-docs-mcp-for-claudecode/
   src/
-    server.ts          # 主 MCP 伺服器 (工具定義)
-    clients.ts         # Google API 用戶端管理
-    auth.ts            # OAuth 2.0 / 服務帳號驗證
-    types.ts           # TypeScript 型別定義
+    server.ts              # 主 MCP 伺服器 (工具定義)
+    clients.ts             # Google API 用戶端管理
+    auth.ts                # OAuth 2.0 / 服務帳號驗證
+    types.ts               # TypeScript 型別定義
     helpers/
-      markdown.ts      # Docs 轉 Markdown 轉換
-      index.ts         # Helper 重新匯出
+      markdown.ts          # Docs 轉 Markdown 轉換
+      index.ts             # Helper 重新匯出
     tools/
-      scriptTools.ts   # Apps Script 工具
-      index.ts         # 工具註冊表
-    googleDocsApiHelpers.ts   # Docs API 輔助函式
-    googleSheetsApiHelpers.ts # Sheets API 輔助函式
-  dist/               # 編譯後的 JavaScript
-  credentials.json    # OAuth 憑證 (不提交)
-  token.json          # 驗證權杖 (不提交)
+      scriptTools.ts       # Apps Script 工具
+      gmailTools.ts        # Gmail 工具
+      calendarTools.ts     # Calendar 工具
+      index.ts             # 工具註冊表
+    googleDocsApiHelpers.ts    # Docs API 輔助函式
+    googleSheetsApiHelpers.ts  # Sheets API 輔助函式
+    gmailApiHelpers.ts         # Gmail API 輔助函式
+    calendarApiHelpers.ts      # Calendar API 輔助函式
+  dist/                    # 編譯後的 JavaScript
+  credentials.json         # OAuth 憑證 (不提交)
+  token.json               # 驗證權杖 (不提交)
 ```
 
 ## 安全注意事項
@@ -277,6 +323,7 @@ google-docs-mcp-for-claudecode/
 
 基於 [a-bonus/google-docs-mcp](https://github.com/a-bonus/google-docs-mcp) 進行增強:
 - Google Apps Script API 整合
+- Gmail 和 Google Calendar API 整合
 - 服務帳號驗證支援
 - 模組化程式碼架構
 - 多語言文件

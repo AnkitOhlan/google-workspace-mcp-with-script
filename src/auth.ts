@@ -24,6 +24,8 @@ const SCOPES = [
   'https://www.googleapis.com/auth/spreadsheets', // Google Sheets API access
   'https://www.googleapis.com/auth/script.projects', // Apps Script projects management
   'https://www.googleapis.com/auth/script.deployments', // Apps Script deployments
+  'https://mail.google.com/', // Gmail full access (read, send, delete, manage)
+  'https://www.googleapis.com/auth/calendar', // Google Calendar full access
 ];
 
 // --- NEW FUNCTION: Handles Service Account Authentication ---

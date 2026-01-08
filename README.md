@@ -7,7 +7,7 @@
 
 [English](README.md) | [Simplified Chinese](README.zh-CN.md) | [Traditional Chinese](README.zh-TW.md)
 
-A comprehensive MCP (Model Context Protocol) server providing full Google Workspace integration - including Google Docs, Sheets, Drive, and **Apps Script APIs**. Compatible with **Claude Code CLI**, **Cursor IDE**, and other MCP-compatible clients.
+A comprehensive MCP (Model Context Protocol) server providing full Google Workspace integration - including Google Docs, Sheets, Drive, **Gmail**, **Calendar**, and **Apps Script APIs**. Compatible with **Claude Code CLI**, **Cursor IDE**, and other MCP-compatible clients.
 
 > **Unique Feature**: This is the **only** Google Workspace MCP server that supports **Apps Script API** - enabling AI-driven automation of Google Sheets, Docs, and other Workspace products.
 
@@ -15,13 +15,15 @@ A comprehensive MCP (Model Context Protocol) server providing full Google Worksp
 
 ## Features
 
-This server provides **49 tools** across 4 Google Workspace services:
+This server provides **72 tools** across 6 Google Workspace services:
 
 | Service | Tools | Description |
 |---------|-------|-------------|
 | Google Docs | 15 | Read, write, format, style, images, tables, comments |
 | Google Sheets | 14 | Read, write, format, create spreadsheets, manage sheets |
 | Google Drive | 16 | List, search, create, move, copy, delete files and folders |
+| Gmail | 15 | Search, read, send, drafts, labels, filters, threads |
+| Google Calendar | 8 | List calendars, events, create, update, delete, free/busy |
 | Apps Script | 4 | Create and manage bound scripts for automation |
 
 ### Google Docs (15 tools)
@@ -51,6 +53,22 @@ This server provides **49 tools** across 4 Google Workspace services:
 ### Apps Script (4 tools)
 
 - **Script Management**: `createBoundScript`, `updateScriptContent`, `getScriptContent`, `getScriptProjects`
+
+### Gmail (15 tools)
+
+- **Messages**: `searchGmailMessages`, `getGmailMessage`, `getGmailMessagesBatch`, `getGmailAttachment`
+- **Send & Draft**: `sendGmailMessage`, `createGmailDraft`
+- **Threads**: `getGmailThread`
+- **Labels**: `listGmailLabels`, `createGmailLabel`, `deleteGmailLabel`, `modifyGmailMessageLabels`
+- **Filters**: `listGmailFilters`, `createGmailFilter`, `deleteGmailFilter`
+- **Management**: `trashGmailMessage`
+
+### Google Calendar (8 tools)
+
+- **Calendars**: `listCalendars`
+- **Events**: `getCalendarEvents`, `getCalendarEvent`, `createCalendarEvent`, `updateCalendarEvent`, `deleteCalendarEvent`
+- **Quick Actions**: `quickAddCalendarEvent`
+- **Availability**: `getCalendarFreeBusy`
 
 ## Prerequisites
 
@@ -97,9 +115,11 @@ npm run build
    - Google Sheets API
    - Google Drive API
    - Apps Script API
+   - Gmail API
+   - Google Calendar API
 4. Configure OAuth consent screen:
    - Select "External" user type
-   - Add required scopes: `documents`, `spreadsheets`, `drive.file`, `script.projects`
+   - Add required scopes: `documents`, `spreadsheets`, `drive.file`, `script.projects`, `gmail`, `calendar`
    - Add your email as a test user
 5. Create OAuth credentials:
    - Go to Credentials > Create Credentials > OAuth client ID
@@ -211,26 +231,52 @@ Update script content with custom functions
 Get content of script project 1abc...xyz
 ```
 
+### Gmail
+
+```
+Search for unread emails from john@example.com
+Read email message with ID abc123
+Send an email to jane@example.com with subject "Meeting"
+Create a draft reply to thread xyz789
+List all Gmail labels
+Create a filter to label emails from support@example.com
+```
+
+### Google Calendar
+
+```
+List all my calendars
+Get events for this week from my primary calendar
+Create a meeting titled "Team Standup" tomorrow at 10am
+Quick add event "Lunch with Sarah on Friday at noon"
+Check free/busy times for next Monday
+Delete event abc123 from my calendar
+```
+
 ## Project Structure
 
 ```
 google-docs-mcp-for-claudecode/
   src/
-    server.ts          # Main MCP server (tool definitions)
-    clients.ts         # Google API client management
-    auth.ts            # OAuth 2.0 / Service Account authentication
-    types.ts           # TypeScript type definitions
+    server.ts              # Main MCP server (tool definitions)
+    clients.ts             # Google API client management
+    auth.ts                # OAuth 2.0 / Service Account authentication
+    types.ts               # TypeScript type definitions
     helpers/
-      markdown.ts      # Docs to Markdown conversion
-      index.ts         # Helper re-exports
+      markdown.ts          # Docs to Markdown conversion
+      index.ts             # Helper re-exports
     tools/
-      scriptTools.ts   # Apps Script tools
-      index.ts         # Tool registry
-    googleDocsApiHelpers.ts   # Docs API helpers
-    googleSheetsApiHelpers.ts # Sheets API helpers
-  dist/               # Compiled JavaScript
-  credentials.json    # OAuth credentials (not committed)
-  token.json          # Auth token (not committed)
+      scriptTools.ts       # Apps Script tools
+      gmailTools.ts        # Gmail tools
+      calendarTools.ts     # Calendar tools
+      index.ts             # Tool registry
+    googleDocsApiHelpers.ts    # Docs API helpers
+    googleSheetsApiHelpers.ts  # Sheets API helpers
+    gmailApiHelpers.ts         # Gmail API helpers
+    calendarApiHelpers.ts      # Calendar API helpers
+  dist/                    # Compiled JavaScript
+  credentials.json         # OAuth credentials (not committed)
+  token.json               # Auth token (not committed)
 ```
 
 ## Security Notes
@@ -277,6 +323,7 @@ Contributions are welcome! Please:
 
 Based on [a-bonus/google-docs-mcp](https://github.com/a-bonus/google-docs-mcp) with additional enhancements:
 - Google Apps Script API integration
+- Gmail and Google Calendar API integration
 - Service Account authentication support
 - Modular code architecture
 - Multi-language documentation

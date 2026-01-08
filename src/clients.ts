@@ -1,7 +1,7 @@
 // src/clients.ts
 // Centralized Google API client management
 
-import { google, docs_v1, drive_v3, sheets_v4, script_v1 } from 'googleapis';
+import { google, docs_v1, drive_v3, sheets_v4, script_v1, gmail_v1, calendar_v3 } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 import { JWT } from 'google-auth-library';
 import { UserError } from 'fastmcp';
@@ -13,6 +13,8 @@ let googleDocs: docs_v1.Docs | null = null;
 let googleDrive: drive_v3.Drive | null = null;
 let googleSheets: sheets_v4.Sheets | null = null;
 let googleScript: script_v1.Script | null = null;
+let googleGmail: gmail_v1.Gmail | null = null;
+let googleCalendar: calendar_v3.Calendar | null = null;
 
 // Export auth client for tools that need direct access
 export function getAuthClient() {
@@ -23,8 +25,8 @@ export function getAuthClient() {
  * Initialize all Google API clients
  */
 export async function initializeGoogleClient() {
-  if (googleDocs && googleDrive && googleSheets && googleScript) {
-    return { authClient, googleDocs, googleDrive, googleSheets, googleScript };
+  if (googleDocs && googleDrive && googleSheets && googleScript && googleGmail && googleCalendar) {
+    return { authClient, googleDocs, googleDrive, googleSheets, googleScript, googleGmail, googleCalendar };
   }
 
   if (!authClient) {
@@ -36,7 +38,9 @@ export async function initializeGoogleClient() {
       googleDrive = google.drive({ version: 'v3', auth: authClient });
       googleSheets = google.sheets({ version: 'v4', auth: authClient });
       googleScript = google.script({ version: 'v1', auth: authClient });
-      console.error("Google API client authorized successfully (including Apps Script).");
+      googleGmail = google.gmail({ version: 'v1', auth: authClient });
+      googleCalendar = google.calendar({ version: 'v3', auth: authClient });
+      console.error("Google API client authorized successfully (Docs, Drive, Sheets, Script, Gmail, Calendar).");
     } catch (error) {
       console.error("FATAL: Failed to initialize Google API client:", error);
       authClient = null;
@@ -44,6 +48,8 @@ export async function initializeGoogleClient() {
       googleDrive = null;
       googleSheets = null;
       googleScript = null;
+      googleGmail = null;
+      googleCalendar = null;
       throw new Error("Google client initialization failed. Cannot start server tools.");
     }
   }
@@ -61,12 +67,18 @@ export async function initializeGoogleClient() {
   if (authClient && !googleScript) {
     googleScript = google.script({ version: 'v1', auth: authClient });
   }
-
-  if (!googleDocs || !googleDrive || !googleSheets || !googleScript) {
-    throw new Error("Google Docs, Drive, Sheets, and Script clients could not be initialized.");
+  if (authClient && !googleGmail) {
+    googleGmail = google.gmail({ version: 'v1', auth: authClient });
+  }
+  if (authClient && !googleCalendar) {
+    googleCalendar = google.calendar({ version: 'v3', auth: authClient });
   }
 
-  return { authClient, googleDocs, googleDrive, googleSheets, googleScript };
+  if (!googleDocs || !googleDrive || !googleSheets || !googleScript || !googleGmail || !googleCalendar) {
+    throw new Error("Google API clients could not be initialized.");
+  }
+
+  return { authClient, googleDocs, googleDrive, googleSheets, googleScript, googleGmail, googleCalendar };
 }
 
 /**
@@ -111,6 +123,28 @@ export async function getScriptClient(): Promise<script_v1.Script> {
     throw new UserError("Google Apps Script client is not initialized. Authentication might have failed.");
   }
   return script;
+}
+
+/**
+ * Get Gmail client
+ */
+export async function getGmailClient(): Promise<gmail_v1.Gmail> {
+  const { googleGmail: gmail } = await initializeGoogleClient();
+  if (!gmail) {
+    throw new UserError("Gmail client is not initialized. Authentication might have failed.");
+  }
+  return gmail;
+}
+
+/**
+ * Get Google Calendar client
+ */
+export async function getCalendarClient(): Promise<calendar_v3.Calendar> {
+  const { googleCalendar: calendar } = await initializeGoogleClient();
+  if (!calendar) {
+    throw new UserError("Google Calendar client is not initialized. Authentication might have failed.");
+  }
+  return calendar;
 }
 
 /**

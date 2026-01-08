@@ -316,6 +316,343 @@ export class MockSheetsClient {
 }
 
 /**
+ * Mock Gmail client
+ */
+export class MockGmailClient {
+  public calls: { method: string; args: any }[] = [];
+  private responses: Map<string, any> = new Map();
+  private errors: Map<string, Error> = new Map();
+
+  users = {
+    messages: {
+      list: async (params: any) => {
+        this.calls.push({ method: 'users.messages.list', args: params });
+        if (this.errors.has('users.messages.list')) {
+          throw this.errors.get('users.messages.list');
+        }
+        return this.responses.get('users.messages.list') || {
+          data: {
+            messages: [
+              { id: 'msg-1', threadId: 'thread-1' },
+              { id: 'msg-2', threadId: 'thread-1' }
+            ]
+          }
+        };
+      },
+      get: async (params: any) => {
+        this.calls.push({ method: 'users.messages.get', args: params });
+        if (this.errors.has('users.messages.get')) {
+          throw this.errors.get('users.messages.get');
+        }
+        return this.responses.get('users.messages.get') || {
+          data: {
+            id: params.id,
+            threadId: 'thread-1',
+            labelIds: ['INBOX'],
+            snippet: 'Test email snippet',
+            payload: {
+              headers: [
+                { name: 'Subject', value: 'Test Subject' },
+                { name: 'From', value: 'test@example.com' },
+                { name: 'To', value: 'recipient@example.com' },
+                { name: 'Date', value: '2024-01-01T00:00:00Z' }
+              ],
+              body: { data: Buffer.from('Test body').toString('base64') }
+            }
+          }
+        };
+      },
+      send: async (params: any) => {
+        this.calls.push({ method: 'users.messages.send', args: params });
+        if (this.errors.has('users.messages.send')) {
+          throw this.errors.get('users.messages.send');
+        }
+        return this.responses.get('users.messages.send') || {
+          data: { id: 'sent-msg-id', threadId: 'thread-id' }
+        };
+      },
+      modify: async (params: any) => {
+        this.calls.push({ method: 'users.messages.modify', args: params });
+        if (this.errors.has('users.messages.modify')) {
+          throw this.errors.get('users.messages.modify');
+        }
+        return this.responses.get('users.messages.modify') || {
+          data: { id: params.id, labelIds: params.requestBody?.addLabelIds || [] }
+        };
+      },
+      trash: async (params: any) => {
+        this.calls.push({ method: 'users.messages.trash', args: params });
+        if (this.errors.has('users.messages.trash')) {
+          throw this.errors.get('users.messages.trash');
+        }
+        return this.responses.get('users.messages.trash') || { data: {} };
+      },
+      attachments: {
+        get: async (params: any) => {
+          this.calls.push({ method: 'users.messages.attachments.get', args: params });
+          if (this.errors.has('users.messages.attachments.get')) {
+            throw this.errors.get('users.messages.attachments.get');
+          }
+          return this.responses.get('users.messages.attachments.get') || {
+            data: { data: 'base64data', size: 1234 }
+          };
+        }
+      }
+    },
+    threads: {
+      get: async (params: any) => {
+        this.calls.push({ method: 'users.threads.get', args: params });
+        if (this.errors.has('users.threads.get')) {
+          throw this.errors.get('users.threads.get');
+        }
+        return this.responses.get('users.threads.get') || {
+          data: {
+            id: params.id,
+            snippet: 'Thread snippet',
+            messages: [
+              { id: 'msg-1', threadId: params.id, payload: { headers: [], body: {} } }
+            ]
+          }
+        };
+      }
+    },
+    labels: {
+      list: async (params: any) => {
+        this.calls.push({ method: 'users.labels.list', args: params });
+        if (this.errors.has('users.labels.list')) {
+          throw this.errors.get('users.labels.list');
+        }
+        return this.responses.get('users.labels.list') || {
+          data: {
+            labels: [
+              { id: 'INBOX', name: 'INBOX', type: 'system' },
+              { id: 'Label_1', name: 'Custom Label', type: 'user' }
+            ]
+          }
+        };
+      },
+      create: async (params: any) => {
+        this.calls.push({ method: 'users.labels.create', args: params });
+        if (this.errors.has('users.labels.create')) {
+          throw this.errors.get('users.labels.create');
+        }
+        return this.responses.get('users.labels.create') || {
+          data: { id: 'new-label-id', name: params.requestBody?.name || 'New Label' }
+        };
+      },
+      delete: async (params: any) => {
+        this.calls.push({ method: 'users.labels.delete', args: params });
+        if (this.errors.has('users.labels.delete')) {
+          throw this.errors.get('users.labels.delete');
+        }
+        return this.responses.get('users.labels.delete') || { data: {} };
+      }
+    },
+    drafts: {
+      create: async (params: any) => {
+        this.calls.push({ method: 'users.drafts.create', args: params });
+        if (this.errors.has('users.drafts.create')) {
+          throw this.errors.get('users.drafts.create');
+        }
+        return this.responses.get('users.drafts.create') || {
+          data: { id: 'draft-id', message: { id: 'draft-msg-id' } }
+        };
+      }
+    },
+    settings: {
+      filters: {
+        list: async (params: any) => {
+          this.calls.push({ method: 'users.settings.filters.list', args: params });
+          if (this.errors.has('users.settings.filters.list')) {
+            throw this.errors.get('users.settings.filters.list');
+          }
+          return this.responses.get('users.settings.filters.list') || {
+            data: { filter: [] }
+          };
+        },
+        create: async (params: any) => {
+          this.calls.push({ method: 'users.settings.filters.create', args: params });
+          if (this.errors.has('users.settings.filters.create')) {
+            throw this.errors.get('users.settings.filters.create');
+          }
+          return this.responses.get('users.settings.filters.create') || {
+            data: { id: 'filter-id', criteria: {}, action: {} }
+          };
+        },
+        delete: async (params: any) => {
+          this.calls.push({ method: 'users.settings.filters.delete', args: params });
+          if (this.errors.has('users.settings.filters.delete')) {
+            throw this.errors.get('users.settings.filters.delete');
+          }
+          return this.responses.get('users.settings.filters.delete') || { data: {} };
+        }
+      }
+    }
+  };
+
+  setResponse(method: string, response: any) {
+    this.responses.set(method, response);
+  }
+
+  setError(method: string, error: Error) {
+    this.errors.set(method, error);
+  }
+
+  reset() {
+    this.calls = [];
+    this.responses.clear();
+    this.errors.clear();
+  }
+}
+
+/**
+ * Mock Google Calendar client
+ */
+export class MockCalendarClient {
+  public calls: { method: string; args: any }[] = [];
+  private responses: Map<string, any> = new Map();
+  private errors: Map<string, Error> = new Map();
+
+  calendarList = {
+    list: async (params: any) => {
+      this.calls.push({ method: 'calendarList.list', args: params });
+      if (this.errors.has('calendarList.list')) {
+        throw this.errors.get('calendarList.list');
+      }
+      return this.responses.get('calendarList.list') || {
+        data: {
+          items: [
+            { id: 'primary', summary: 'Primary Calendar', primary: true, accessRole: 'owner' },
+            { id: 'cal-2', summary: 'Work Calendar', accessRole: 'writer' }
+          ]
+        }
+      };
+    },
+    get: async (params: any) => {
+      this.calls.push({ method: 'calendarList.get', args: params });
+      if (this.errors.has('calendarList.get')) {
+        throw this.errors.get('calendarList.get');
+      }
+      return this.responses.get('calendarList.get') || {
+        data: { id: params.calendarId, summary: 'Calendar', primary: params.calendarId === 'primary' }
+      };
+    }
+  };
+
+  events = {
+    list: async (params: any) => {
+      this.calls.push({ method: 'events.list', args: params });
+      if (this.errors.has('events.list')) {
+        throw this.errors.get('events.list');
+      }
+      return this.responses.get('events.list') || {
+        data: {
+          items: [
+            {
+              id: 'event-1',
+              summary: 'Test Meeting',
+              start: { dateTime: '2024-01-15T09:00:00Z' },
+              end: { dateTime: '2024-01-15T10:00:00Z' },
+              htmlLink: 'https://calendar.google.com/event/1'
+            }
+          ]
+        }
+      };
+    },
+    get: async (params: any) => {
+      this.calls.push({ method: 'events.get', args: params });
+      if (this.errors.has('events.get')) {
+        throw this.errors.get('events.get');
+      }
+      return this.responses.get('events.get') || {
+        data: {
+          id: params.eventId,
+          summary: 'Test Event',
+          start: { dateTime: '2024-01-15T09:00:00Z' },
+          end: { dateTime: '2024-01-15T10:00:00Z' }
+        }
+      };
+    },
+    insert: async (params: any) => {
+      this.calls.push({ method: 'events.insert', args: params });
+      if (this.errors.has('events.insert')) {
+        throw this.errors.get('events.insert');
+      }
+      return this.responses.get('events.insert') || {
+        data: {
+          id: 'new-event-id',
+          summary: params.requestBody?.summary || 'New Event',
+          htmlLink: 'https://calendar.google.com/event/new'
+        }
+      };
+    },
+    update: async (params: any) => {
+      this.calls.push({ method: 'events.update', args: params });
+      if (this.errors.has('events.update')) {
+        throw this.errors.get('events.update');
+      }
+      return this.responses.get('events.update') || {
+        data: {
+          id: params.eventId,
+          summary: params.requestBody?.summary || 'Updated Event',
+          htmlLink: 'https://calendar.google.com/event/updated'
+        }
+      };
+    },
+    delete: async (params: any) => {
+      this.calls.push({ method: 'events.delete', args: params });
+      if (this.errors.has('events.delete')) {
+        throw this.errors.get('events.delete');
+      }
+      return this.responses.get('events.delete') || { data: {} };
+    },
+    quickAdd: async (params: any) => {
+      this.calls.push({ method: 'events.quickAdd', args: params });
+      if (this.errors.has('events.quickAdd')) {
+        throw this.errors.get('events.quickAdd');
+      }
+      return this.responses.get('events.quickAdd') || {
+        data: {
+          id: 'quick-event-id',
+          summary: 'Quick Added Event',
+          htmlLink: 'https://calendar.google.com/event/quick'
+        }
+      };
+    }
+  };
+
+  freebusy = {
+    query: async (params: any) => {
+      this.calls.push({ method: 'freebusy.query', args: params });
+      if (this.errors.has('freebusy.query')) {
+        throw this.errors.get('freebusy.query');
+      }
+      return this.responses.get('freebusy.query') || {
+        data: {
+          calendars: {
+            primary: { busy: [{ start: '2024-01-15T09:00:00Z', end: '2024-01-15T10:00:00Z' }] }
+          }
+        }
+      };
+    }
+  };
+
+  setResponse(method: string, response: any) {
+    this.responses.set(method, response);
+  }
+
+  setError(method: string, error: Error) {
+    this.errors.set(method, error);
+  }
+
+  reset() {
+    this.calls = [];
+    this.responses.clear();
+    this.errors.clear();
+  }
+}
+
+/**
  * Tool definition captured by MockFastMCP
  */
 export interface CapturedTool {
